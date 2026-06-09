@@ -258,7 +258,7 @@ body {
   grid-template-columns:
     fit-content(580px)
     minmax(300px, 1fr)
-    minmax(290px, 414px);
+    minmax(290px, 380px);
   align-items: center;
   column-gap: clamp(1.5rem, 3.5vw, 4rem);
   max-width: var(--layout-max);
@@ -357,9 +357,10 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.75rem, 2vw, 2.375rem);
-  /* Design: three 202px columns + two 38px gutters */
+  /* Slightly wider than the 682px design frame — the slimmer enquiry
+     panel hands its spare space to the collage so the photos read bigger */
   width: 100%;
-  max-width: 682px;
+  max-width: 760px;
   height: var(--hero-h);
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
@@ -442,13 +443,13 @@ body {
 /* =========================================================
    Enquiry form (block)
    ========================================================= */
-/* Figma: 414 × 435, radius 12, 24px padding (366px inner column) */
+/* Compact panel pinned to the right of the hero, vertically centered */
 .enquiry {
   align-self: center;
+  justify-self: end;
   width: 100%;
-  max-width: 414px;
-  min-height: 435px;
-  padding: 24px;
+  max-width: 380px;
+  padding: 20px;
   background-image: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.2) 0%,
@@ -460,20 +461,20 @@ body {
 }
 
 .enquiry__title {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   color: var(--color-white);
-  font-size: clamp(1.35rem, 1.6vw, 1.875rem);
+  font-size: clamp(1.3rem, 1.45vw, 1.625rem);
   font-weight: 700;
 }
 
 .enquiry__field {
-  margin-bottom: 0.875rem;
+  margin-bottom: 0.75rem;
 }
 
 .enquiry__input,
 .enquiry__textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 0.9rem;
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
@@ -490,7 +491,7 @@ body {
 }
 
 .enquiry__textarea {
-  min-height: 140px;
+  min-height: 110px;
   resize: vertical;
 }
 
@@ -585,7 +586,7 @@ body {
 /* Tablet: drop the central collage to a full-width band below */
 @media (max-width: 1200px) {
   .hero__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 414px);
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
     grid-template-areas:
       "intro form"
       "media media";
@@ -632,6 +633,11 @@ body {
 
   .hero__media {
     display: none;
+  }
+
+  /* single column: the panel fills the width instead of pinning right */
+  .enquiry {
+    justify-self: stretch;
   }
 
   .hero__event {
