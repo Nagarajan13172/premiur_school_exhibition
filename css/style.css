@@ -253,12 +253,14 @@ body {
 
 .hero__inner {
   display: grid;
+  /* Intro sizes to its own text (fit-content) so the nowrap headline/pill can
+     never slide under the collage; collage takes the leftovers; form 414 max. */
   grid-template-columns:
-    minmax(360px, 1fr)
-    minmax(320px, 1.4fr)
-    minmax(290px, 360px);
+    fit-content(580px)
+    minmax(300px, 1fr)
+    minmax(290px, 414px);
   align-items: center;
-  column-gap: clamp(1.5rem, 3vw, 3rem);
+  column-gap: clamp(1.5rem, 3.5vw, 4rem);
   max-width: var(--layout-max);
   min-height: var(--hero-h);
   margin-inline: auto;
@@ -279,27 +281,27 @@ body {
   display: block;
 }
 
-/* "Discover Gurugram’s" — Museo Sans 600, ~40px, tight; kept on one line */
+/* "Discover Gurugram’s" — Museo Sans 600, ~44px, tight; kept on one line */
 .hero__heading-line--discover {
   font-weight: 600;
-  font-size: clamp(1.5rem, 2.4vw, 2.5rem);
-  line-height: 1.08;
+  font-size: clamp(1.4rem, 2.3vw, 2.75rem);
+  line-height: 1.15;
   white-space: nowrap;
 }
 
-/* "Top 30+ Schools" — Museo Sans 600, ~40px, tight; kept on one line */
+/* "Top 30+ Schools" — larger than the line above it, per the design (~56px) */
 .hero__heading-line--main {
-  font-weight: 600;
-  font-size: clamp(1.5rem, 2.4vw, 2.5rem);
-  line-height: 1.08;
+  font-weight: 700;
+  font-size: clamp(1.65rem, 2.9vw, 3.5rem);
+  line-height: 1.12;
   white-space: nowrap;
 }
 
-/* "All In One Place" — Museo Sans 400, ~26px, uppercase */
+/* "All In One Place" — Museo Sans 400, ~28px, uppercase */
 .hero__heading-line--tag {
   margin-top: 0.35em;
   font-weight: 400;
-  font-size: clamp(1rem, 1.7vw, 1.625rem);
+  font-size: clamp(1rem, 1.45vw, 1.75rem);
   line-height: 1.2;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -310,9 +312,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: clamp(0.75rem, 1.3vw, 1.5rem);
-  padding: 0.55rem clamp(1rem, 1.6vw, 1.5rem);
+  padding: clamp(0.65rem, 1vw, 1.1rem) clamp(1rem, 1.7vw, 1.625rem);
   background-color: var(--color-cream);
-  border-radius: 999px;
+  border-radius: 28px;
   color: var(--color-cream-ink);
 }
 
@@ -322,10 +324,10 @@ body {
   flex-direction: column;
 }
 
-/* "Apparel House," / "2–3 August 2025" — Open Sans 700, ~22px */
+/* "Apparel House," / "2–3 August 2025" — Open Sans 700, ~24px */
 .hero__event-title {
   font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+  font-size: clamp(1.05rem, 1.55vw, 1.5rem);
   font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
@@ -351,9 +353,13 @@ body {
 /* ---------- Center: scrolling image collage ---------- */
 .hero__media {
   align-self: stretch;
+  justify-self: center;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.75rem, 1.2vw, 1.25rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 2.375rem);
+  /* Design: three 202px columns + two 38px gutters */
+  width: 100%;
+  max-width: 682px;
   height: var(--hero-h);
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
@@ -399,8 +405,9 @@ body {
 
 .hero__media-item {
   flex: 0 0 auto;
-  /* margin (not flex gap) so two stacked copies divide evenly → seamless loop */
-  margin-bottom: clamp(0.75rem, 1vw, 1rem);
+  /* margin (not flex gap) so two stacked copies divide evenly → seamless loop;
+     matches the horizontal gutter for an even rhythm */
+  margin-bottom: clamp(0.75rem, 2vw, 2.375rem);
   /* Matches the source images (202x440) so the photos aren't cropped */
   aspect-ratio: 202 / 440;
   overflow: hidden;
@@ -435,33 +442,40 @@ body {
 /* =========================================================
    Enquiry form (block)
    ========================================================= */
+/* Figma: 414 × 435, radius 12, 24px padding (366px inner column) */
 .enquiry {
   align-self: center;
-  padding: clamp(1.1rem, 1.5vw, 1.5rem);
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  width: 100%;
+  max-width: 414px;
+  min-height: 435px;
+  padding: 24px;
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(6, 21, 50, 0.2) 100%
+  );
   border-radius: 12px;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
 
 .enquiry__title {
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.25rem;
   color: var(--color-white);
-  font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+  font-size: clamp(1.35rem, 1.6vw, 1.875rem);
   font-weight: 700;
 }
 
 .enquiry__field {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.875rem;
 }
 
 .enquiry__input,
 .enquiry__textarea {
   width: 100%;
-  padding: 0.6rem 0.9rem;
+  padding: 0.75rem 1rem;
   background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
   color: var(--color-white);
   /* >=16px so iOS Safari does not auto-zoom the viewport on focus */
@@ -476,7 +490,7 @@ body {
 }
 
 .enquiry__textarea {
-  min-height: 78px;
+  min-height: 140px;
   resize: vertical;
 }
 
@@ -598,6 +612,10 @@ body {
   .hero__media {
     grid-area: media;
     height: 320px;
+    /* the 682px cap is for the desktop three-column layout only —
+       here the collage is a full-width band again */
+    max-width: none;
+    justify-self: stretch;
   }
 }
 
