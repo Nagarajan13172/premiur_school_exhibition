@@ -258,7 +258,7 @@ body {
   grid-template-columns:
     fit-content(580px)
     minmax(300px, 1fr)
-    minmax(290px, 380px);
+    minmax(280px, 340px);
   align-items: center;
   column-gap: clamp(1.5rem, 3.5vw, 4rem);
   max-width: var(--layout-max);
@@ -448,8 +448,8 @@ body {
   align-self: center;
   justify-self: end;
   width: 100%;
-  max-width: 380px;
-  padding: 20px;
+  max-width: 340px;
+  padding: 16px;
   background-image: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.2) 0%,
@@ -461,20 +461,20 @@ body {
 }
 
 .enquiry__title {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   color: var(--color-white);
-  font-size: clamp(1.3rem, 1.45vw, 1.625rem);
+  font-size: clamp(1.2rem, 1.3vw, 1.4rem);
   font-weight: 700;
 }
 
 .enquiry__field {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.625rem;
 }
 
 .enquiry__input,
 .enquiry__textarea {
   width: 100%;
-  padding: 0.65rem 0.9rem;
+  padding: 0.55rem 0.85rem;
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
@@ -491,7 +491,7 @@ body {
 }
 
 .enquiry__textarea {
-  min-height: 110px;
+  min-height: 88px;
   resize: vertical;
 }
 
@@ -512,7 +512,7 @@ body {
 .enquiry__submit {
   display: inline-flex;
   align-items: stretch;
-  height: 48px;
+  height: 44px;
   margin-top: 0.25rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -525,7 +525,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
+  width: 44px;
   background-color: var(--color-white);
   color: var(--color-navy);
   border-radius: var(--radius-sm) 0 0 var(--radius-sm);
@@ -586,7 +586,7 @@ body {
 /* Tablet: drop the central collage to a full-width band below */
 @media (max-width: 1200px) {
   .hero__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
     grid-template-areas:
       "intro form"
       "media media";
