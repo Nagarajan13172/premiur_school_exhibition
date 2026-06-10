@@ -69,9 +69,9 @@
      fit one screen on shorter laptops (≈ navbar + stats + buffer = 320px). */
   --hero-h: clamp(440px, calc(100vh - 320px), 720px);
 
-  /* CTA button (reduced from 60 → 46 per design feedback) */
-  --cta-size: 46px;
-  --cta-size-sm: 40px;
+  /* CTA button (reduced from 60 → 46 → 42 per design feedback) */
+  --cta-size: 42px;
+  --cta-size-sm: 38px;
 
   /* Misc */
   --radius-sm: 4px;
@@ -181,23 +181,27 @@ body {
 }
 
 .navbar__cta-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   transition: transform 0.25s var(--ease);
 }
 
 .navbar__cta-text {
   display: inline-flex;
   align-items: center;
-  padding-inline: clamp(1rem, 2vw, 1.75rem);
+  padding-inline: clamp(0.625rem, 1vw, 0.875rem);
   background-color: var(--color-white);
   color: var(--color-navy);
   border: 2px solid var(--color-navy);
   border-left: 0;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  /* Figma: Open Sans 700, 14px, line-height 100%, no tracking, uppercase */
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
   transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
