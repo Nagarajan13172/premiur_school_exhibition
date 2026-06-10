@@ -570,7 +570,7 @@ body {
   justify-content: center;
   width: 44px;
   background-color: var(--color-white);
-  color: var(--color-navy);
+  color: var(--color-hero-end);
   border-radius: var(--radius-sm) 0 0 var(--radius-sm);
   transition: background-color 0.25s var(--ease);
 }
@@ -585,20 +585,24 @@ body {
   display: inline-flex;
   align-items: center;
   padding-inline: clamp(1.25rem, 2vw, 2rem);
-  background-color: var(--color-navy);
+  /* Figma: transparent label outlined in white — the panel shows through */
+  background-color: transparent;
   color: var(--color-white);
+  border: 2px solid var(--color-white);
+  border-left: 0;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition: background-color 0.25s var(--ease);
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 
 .enquiry__submit:hover .enquiry__submit-text,
 .enquiry__submit:focus-visible .enquiry__submit-text {
-  background-color: var(--color-navy-dark);
+  background-color: var(--color-white);
+  color: var(--color-hero-end);
 }
 
 .enquiry__submit:hover .enquiry__submit-icon svg {
@@ -1130,9 +1134,12 @@ body {
 /* =========================================================
    What Makes This a Must-Visit — slider (blocks: must, must-card)
    ========================================================= */
+/* All .must sizes scale linearly from the 1920px design canvas (vw for the
+   section, cqw inside the card) so laptop widths render the Figma scaled
+   to fit instead of oversized type in shrunken cards. */
 .must {
   position: relative;
-  padding-block: clamp(3rem, 6vw, 5rem) clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(2.5rem, 4.17vw, 5rem) clamp(3rem, 5.83vw, 7rem);
   background-image: linear-gradient(160deg, #221551 0%, #3a1a66 60%, #2c1556 100%);
   /* Curved bottom edge revealing the white page beneath */
   border-bottom-left-radius: 50% 64px;
@@ -1140,9 +1147,9 @@ body {
 }
 
 .must__heading {
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: clamp(1.5rem, 2.92vw, 3.5rem);
   color: var(--color-white);
-  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  font-size: clamp(1.625rem, 2.29vw, 2.75rem);
   font-weight: 700;
   text-align: center;
 }
@@ -1150,12 +1157,13 @@ body {
 .must__viewport {
   max-width: var(--layout-max);
   margin-inline: auto;
-  padding-inline: var(--space-edge);
+  /* No right padding: the 5th card peeks at the edge as a slider affordance */
+  padding-inline: var(--space-edge) 0;
 }
 
 .must__track {
   display: flex;
-  gap: 16px;
+  gap: clamp(10px, 0.83vw, 16px);
   overflow-x: auto;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
@@ -1167,40 +1175,53 @@ body {
   display: none;
 }
 
+/* Figma card: 417×380 outer, 30px padding, 44px icon→body gap. The card is a
+   size container so children size in cqw (content box = 417−4−60 = 353px,
+   hence the odd-looking coefficients). cqw can't size the container itself,
+   so the card's own box uses the vw equivalents. */
 .must-card {
   display: flex;
   flex: 0 0 clamp(272px, 22vw, 417px);
   flex-direction: column;
   /* Content grouped at the top; the empty space falls at the bottom */
   justify-content: flex-start;
-  gap: clamp(1.75rem, 3vw, 2.75rem);
-  min-height: clamp(330px, 23vw, 380px);
-  padding: clamp(1.5rem, 1.9vw, 1.875rem);
+  gap: clamp(1.5rem, 2.29vw, 2.75rem);
+  min-height: clamp(248px, 19.8vw, 380px);
+  padding: clamp(1.125rem, 1.56vw, 1.875rem);
   scroll-snap-align: start;
   background-image: linear-gradient(59.05deg, #ddbfff 0.39%, #edddff 93.5%);
   border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 20px;
+  container-type: inline-size;
 }
 
+/* Children: first declaration = vw fallback for no-container-query browsers */
 .must-card__icon {
   width: auto;
-  height: clamp(54px, 4.4vw, 68px);
+  height: clamp(48px, 4.17vw, 80px);
+  height: clamp(48px, 22.66cqw, 80px);
   align-self: flex-start;
 }
 
 .must-card__title {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.375rem, 2.8cqw, 0.625rem);
   color: #1c1a4e;
   font-family: var(--font-body);
-  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  /* Open Sans 700 24px/150% at full card size */
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  font-size: clamp(1rem, 6.8cqw, 1.5rem);
   font-weight: 700;
   line-height: 1.5;
 }
 
 .must-card__text {
-  color: #5b5575;
+  /* #5b5575 was 4.32:1 on the gradient's dark stop #ddbfff — below AA */
+  color: #544e6c;
   font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  /* Open Sans 400 20px/150% at full card size */
+  font-size: clamp(0.875rem, 1.04vw, 1.25rem);
+  font-size: clamp(0.875rem, 5.67cqw, 1.25rem);
   font-weight: 400;
   line-height: 1.5;
 }
@@ -1208,16 +1229,16 @@ body {
 .must__controls {
   display: flex;
   justify-content: center;
-  gap: clamp(1rem, 1.5vw, 1.875rem);
-  margin-top: clamp(2rem, 3.5vw, 3rem);
+  gap: clamp(0.875rem, 1.56vw, 1.875rem);
+  margin-top: clamp(1.5rem, 2.5vw, 3rem);
 }
 
 .must__arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: clamp(44px, 3.13vw, 60px);
+  height: clamp(44px, 3.13vw, 60px);
   color: var(--color-white);
   background-color: transparent;
   border: 2.25px solid var(--color-white);
